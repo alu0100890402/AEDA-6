@@ -1,6 +1,5 @@
 #include "../entities/ABB/ABB.hpp"
 
-
 int main() {
 
   // for((i=16; i<256; i++)); do
@@ -8,6 +7,8 @@ int main() {
   //   printf '\e[0m';
   //   [ ! $((($i - 15) % 6)) -eq 0 ] && printf ' ' || printf '\n'
   // done
+
+  // ABB<int> arbol;
 
   return 0;
 }
