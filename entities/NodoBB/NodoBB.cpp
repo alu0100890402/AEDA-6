@@ -2,7 +2,7 @@
 
 template <class Clave>
 NodoBB<Clave>::NodoBB(Clave X, NodoBB* iz, NodoBB* dc): data(X), izq(iz), dcha(dc) {
-  std::cout << "Constructor de NodoBB" << '\n';
+  // std::cout << "Constructor de NodoBB" << '\n';
 }
 
 // template <class Clave>

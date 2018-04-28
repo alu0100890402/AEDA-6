@@ -2,19 +2,19 @@
 
 template <class Clave>
 ABB<Clave>::ABB(): raiz(NULL){
-  std::cout << "Constructor ABB" << '\n';
+  // std::cout << "Constructor ABB" << '\n';
 }
 
 
 template <class Clave>
 ABB<Clave>::~ABB() {
-  std::cout << "Destructor ABB" << '\n';
+  // std::cout << "Destructor ABB" << '\n';
   podar(raiz);
 }
 
 template <class Clave>
 void ABB<Clave>::podar(NodoBB<Clave>* nodo) {
-  std::cout << "Funcion podar" << '\n';
+  // std::cout << "Funcion podar" << '\n';
   if(nodo == NULL) return;
   podar(nodo->izq);
   podar(nodo->dcha);
@@ -24,7 +24,7 @@ void ABB<Clave>::podar(NodoBB<Clave>* nodo) {
 
 template <class Clave>
 NodoBB<Clave>* ABB<Clave>::buscar(Clave X) {
-  std::cout << "Funcion buscar ABB" << '\n';
+  // std::cout << "Funcion buscar ABB" << '\n';
   return buscarRama(raiz, X);
 }
 
@@ -38,7 +38,7 @@ NodoBB<Clave>* ABB<Clave>::buscarRama(NodoBB<Clave>* nodo, Clave X) {
 
 template <class Clave>
 void ABB<Clave>::insertar(Clave X) {
-  std::cout << "Funcion insertar ABB" << '\n';
+  // std::cout << "Funcion insertar ABB" << '\n';
   insertarRama(raiz, X);
 }
 
@@ -51,7 +51,7 @@ void ABB<Clave>::insertarRama(NodoBB<Clave>* &nodo, Clave X) {
 
 template <class Clave>
 bool ABB<Clave>::eliminar(Clave X) {
-  std::cout << "Funcion eliminar ABB" << '\n';
+  // std::cout << "Funcion eliminar ABB" << '\n';
   return eliminarRama(raiz, X);
 }
 
@@ -78,6 +78,46 @@ void ABB<Clave>::sustituye(NodoBB<Clave>* &eliminado, NodoBB<Clave>* &sust) {
     sust = sust->izq;
   }
 }
+
+template <class Clave>
+const int ABB<Clave>::prof() {
+  return profRama(raiz);
+}
+
+template <class Clave>
+const int ABB<Clave>::profRama(NodoBB<Clave>* nodo) {
+  if(nodo == NULL)  return 0;
+  int lDepth = 1+profRama(nodo->izq);
+  int rDepth = 1+profRama(nodo->dcha);
+  return (rDepth > lDepth ? rDepth : lDepth);
+}
+
+template <class Clave>
+void ABB<Clave>::show() {
+  // std::cout << "Funcion show" << '\n';
+  int nivel = 0;
+  std::queue<NodoBB<Clave>*> cola;
+  cola.push(raiz);
+  while(!cola.empty()) {
+    std::cout << "Nv " << nivel++ << ": ";
+    int cont = cola.size();
+    while(cont-- > 0) {
+      std::cout << "[";
+      if(cola.front() != NULL) {
+        std::cout << cola.front()->data;
+        cola.push(cola.front()->izq);
+        cola.push(cola.front()->dcha);
+      } else {
+        std::cout << ".";
+      }
+      std::cout << "] " ;
+      cola.pop();
+    }
+    std::cout << '\n';
+  }
+
+}
+
 
 template class ABB<int>;
 template class ABB<DNI>;

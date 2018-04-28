@@ -17,5 +17,7 @@ public:
   bool eliminarRama(NodoBB<Clave>*&, Clave);
   void sustituye(NodoBB<Clave>*&, NodoBB<Clave>*&);
 
-
+  const int prof();
+  const int profRama(NodoBB<Clave>*);
+  void show();
 };
