@@ -1,5 +1,11 @@
 #include "../entities/ABB/ABB.hpp"
 
+int MAX=0, MIN=1000, CURRENT=0;
+
+ABB<int> *arbol;
+
+float* testData(std::vector<int>&, int, int, int);
+
 int main() {
 
   // for((i=16; i<256; i++)); do
@@ -8,7 +14,7 @@ int main() {
   //   [ ! $((($i - 15) % 6)) -eq 0 ] && printf ' ' || printf '\n'
   // done
 
-  ABB<int> arbol;
+  arbol = new ABB<int>;
 
   int modo;
   std::cout << "Bienvenido" << '\n';
@@ -28,35 +34,65 @@ int main() {
         int clave;  bool res;
         std::cout << "Clave: ";
         std::cin >> clave;
-        if(opcion == 1) arbol.insertar(clave);
+        if(opcion == 1) arbol->insertar(clave);
         else  {
-          res = arbol.eliminar(clave);
+          res = arbol->eliminar(clave);
           if(!res)  std::cout << "No se encuentra esta clave en el ABB" << '\n';
         }
       }
-      arbol.show();
+      arbol->show();
     } while (opcion != 0);
   } else {
-    std::cout << "Funcion en desarrollo" << '\n';
+    int N, nPruebas;
+    std::cout << "Selecciona el tamaño del arbol: ";
+    std::cin >> N;
+    std::cout << "Selecciona el numero de pruebas: ";
+    std::cin >> nPruebas;
+    std::vector<int> bancoPruebas;
+
+    for (size_t i=0; i<N*2; i++) {
+      bancoPruebas.push_back( (rand()%100) );
+    }
+    for (size_t i=0; i<N; i++) {
+      arbol->insertar(bancoPruebas[i]);
+    }
+
+    float* resBusqu = testData(bancoPruebas, nPruebas, 0, bancoPruebas.size()/2);
+    float* resInser = testData(bancoPruebas, nPruebas, bancoPruebas.size()/2, bancoPruebas.size());
+
+    // Salida del programa
+    std::cout << "\n\tN\tPruebas\tMinimo\tMedio\tMaximo" << '\n';
+    std::cout << "Busq.\t"<< N <<"\t"<< nPruebas <<"\t"<< resBusqu[0] <<"\t"<<resBusqu[1]<<"\t"<< resBusqu[2] << '\n';
+    std::cout << "Inserc.\t"<< N <<"\t"<< nPruebas <<"\t"<< resInser[0] <<"\t"<<resInser[1]<<"\t"<< resInser[2]<< '\n';
+
   }
-
-  // arbol.insertar(5);
-  // arbol.insertar(7);
-  // arbol.insertar(3);
-  // arbol.insertar(2);
-  // arbol.insertar(4);
-  // arbol.insertar(6);
-  // arbol.insertar(8);
-
   // std::cout << "├── Cuadratica.cpp" << '\n';
   // std::cout << "↘ ↙⤵" << '\n';
   //
   // std::cout << "Nv 0:     ╭─[6]─╮" << '\n';
   // std::cout << "Nv 1:  ╭[4]╮   ╭[8]╮" << '\n';
   // std::cout << "Nv 1: [3] [5] [7] [9]" << '\n';
-  // arbol.show();
 
-  // std::cout << "Profundidad actual del arbol: " << arbol.prof() << '\n';
-//
   return 0;
+}
+
+
+float* testData(std::vector<int>& banco, int nPruebas, int idxmin, int idxmax) {
+  MAX=0, MIN=1000, CURRENT=0;
+  // Pruebas
+  int idxtotal = idxmax - idxmin;
+  int acumulado=CURRENT, cont=nPruebas, i=0;
+  while(cont-- > 0) {
+    int indice = (i++)%(idxtotal)+idxmin;
+    auto res = arbol->buscar(banco[indice]);
+    if(CURRENT < MIN){ MIN = CURRENT; std::cout << "El minimo ahora es: " << MIN << '\n';}
+    if(CURRENT > MAX){ MAX = CURRENT; std::cout << "El maximo ahora es: " << MAX << '\n';}
+    acumulado += CURRENT;
+    CURRENT = 0;
+  }
+  float *resultados = new float[3];
+  resultados[0] = MIN;
+  resultados[1] = (float)acumulado/nPruebas;
+  resultados[2] = MAX;
+  return resultados;
 }

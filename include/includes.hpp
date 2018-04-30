@@ -3,6 +3,7 @@
 #include <queue>
 #include <cmath>
 
+extern int MAX, MIN, CURRENT;
 
 // int p = prof();
 // int nivel = 0;

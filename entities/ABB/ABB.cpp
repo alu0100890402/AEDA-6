@@ -31,8 +31,8 @@ NodoBB<Clave>* ABB<Clave>::buscar(Clave X) {
 template <class Clave>
 NodoBB<Clave>* ABB<Clave>::buscarRama(NodoBB<Clave>* nodo, Clave X) {
   if(nodo == NULL)  return NULL;
-  if(X == nodo->data) return nodo;
-  if(X < nodo->data)  return buscarRama(nodo->izq, X);
+  CURRENT++; if(X == nodo->data) return nodo;
+  CURRENT++; if(X < nodo->data)  return buscarRama(nodo->izq, X);
   return buscarRama(nodo->dcha, X);
 }
 
