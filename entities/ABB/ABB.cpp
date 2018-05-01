@@ -94,14 +94,14 @@ const int ABB<Clave>::profRama(NodoBB<Clave>* nodo) {
 
 template <class Clave>
 void ABB<Clave>::show() {
-  // std::cout << "Funcion show" << '\n';
+
   int nivel = 0;
   std::queue<NodoBB<Clave>*> cola;
   cola.push(raiz);
   while(!cola.empty()) {
     std::cout << "Nv " << nivel++ << ": ";
-    int cont = cola.size();
-    while(cont-- > 0) {
+    int i = cola.size();
+    while(i-- > 0) {
       std::cout << "[";
       if(cola.front() != NULL) {
         std::cout << cola.front()->data;
@@ -110,12 +110,46 @@ void ABB<Clave>::show() {
       } else {
         std::cout << ".";
       }
-      std::cout << "] " ;
+      std::cout << "]  " ;
       cola.pop();
     }
     std::cout << '\n';
   }
+  // std::cout << "Funcion show" << '\n';
+  // int p = prof();
+  // int offset = pow(2, p);
+  // for(int i=0; i<=p; i++) {
+  //   std::cout << "Nv " << i << ":\n";
+  // }
+  // std::cout << "\033["<<p+1<<"A\033[5C";
+  // // for(int i=1; i<offset; i++) std::cout << "           ";
+  //     printRama(raiz);
+  //
+  //
+  // std::cout << "\033["<<p<<"B\n";
+}
 
+template <class Clave>
+void ABB<Clave>::printRama(NodoBB<Clave>* nodo) {
+  int p = profRama(nodo);
+  int offset = pow(2, p)-1;
+  if(nodo != NULL) {
+    std::cout << "[";
+    std::cout << nodo->data;
+    std::cout << "]";
+    std::cout << "\033[1B" << "\033[17D"
+    << "\033[" << offset*7 << "D";
+    printRama(nodo->izq);
+    std::cout << "\033[1A"// << "\033[9D"
+    << "\033[" << offset*7 << "C";
+    std::cout << "\033[1B"
+    << "\033[" << offset*7 << "C";
+    printRama(nodo->dcha);
+    std::cout << "\033[1A"
+    << "\033[" << offset*7+5 << "D";
+  } else {
+    std::cout << "   [...]   ";
+  }
 }
 
 

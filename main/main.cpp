@@ -2,9 +2,9 @@
 
 int MAX=0, MIN=1000, CURRENT=0;
 
-ABB<int> *arbol;
+ABB<DNI> *arbol;
 
-float* testData(std::vector<int>&, int, int, int);
+float* testData(std::vector<DNI>&, int, int, int);
 
 int main() {
 
@@ -14,7 +14,7 @@ int main() {
   //   [ ! $((($i - 15) % 6)) -eq 0 ] && printf ' ' || printf '\n'
   // done
 
-  arbol = new ABB<int>;
+  arbol = new ABB<DNI>;
 
   int modo;
   std::cout << "Bienvenido" << '\n';
@@ -31,9 +31,10 @@ int main() {
       std::cout << "[2] Eliminar Clave" << "\t: ";
       std::cin >> opcion;
       if(opcion > 0) {
-        int clave;  bool res;
-        std::cout << "Clave: ";
-        std::cin >> clave;
+        std::string input;  bool res;
+        std::cout << "DNI: ";
+        std::cin >> input;
+        DNI clave(false, input);
         if(opcion == 1) arbol->insertar(clave);
         else  {
           res = arbol->eliminar(clave);
@@ -48,10 +49,10 @@ int main() {
     std::cin >> N;
     std::cout << "Selecciona el numero de pruebas: ";
     std::cin >> nPruebas;
-    std::vector<int> bancoPruebas;
+    std::vector<DNI> bancoPruebas;
 
     for (size_t i=0; i<N*2; i++) {
-      bancoPruebas.push_back( (rand()%100) );
+      bancoPruebas.push_back( DNI(true) );
     }
     for (size_t i=0; i<N; i++) {
       arbol->insertar(bancoPruebas[i]);
@@ -77,7 +78,7 @@ int main() {
 }
 
 
-float* testData(std::vector<int>& banco, int nPruebas, int idxmin, int idxmax) {
+float* testData(std::vector<DNI>& banco, int nPruebas, int idxmin, int idxmax) {
   MAX=0, MIN=1000, CURRENT=0;
   // Pruebas
   int idxtotal = idxmax - idxmin;

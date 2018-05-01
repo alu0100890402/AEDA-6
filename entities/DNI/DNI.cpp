@@ -1,7 +1,8 @@
 #include "DNI.hpp"
 
-DNI::DNI(bool random, std::string d, std::string n, std::string a) {
+DNI::DNI(bool random, std::string d, char l, std::string n, std::string a) {
   dato = random ? "" : d;
+  letra = l;
   nombre = n;
   apellido = a;
   if(random) {
@@ -69,3 +70,8 @@ std::ostream& operator << (std::ostream& os, const DNI& d) {
     os << d.getKey();
     return os;
 }
+
+// std::istream& operator >> (std::istream& is, DNI& d) {
+//     is >> ;
+//     return is;
+// }

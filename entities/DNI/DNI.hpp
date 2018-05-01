@@ -8,7 +8,7 @@ class DNI {
   std::string nombre;
   std::string apellido;
 public:
-  DNI(bool = false, std::string = "0", std::string = "N/A", std::string = "N/A");
+  DNI(bool = false, std::string = "0", char='A', std::string = "N/A", std::string = "N/A");
 
   // Modificacion
   std::string getNombre();
@@ -22,6 +22,8 @@ public:
   bool operator < (DNI&);
   bool operator <= (DNI&);
   operator unsigned long();
+
+  // friend std::istream& operator>>(std::istream&, DNI&);
 
 };
 

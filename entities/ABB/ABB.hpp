@@ -20,4 +20,5 @@ public:
   const int prof();
   const int profRama(NodoBB<Clave>*);
   void show();
+  void printRama(NodoBB<Clave>*);
 };
