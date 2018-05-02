@@ -54,10 +54,10 @@ bool DNI::operator >= (DNI& d) {
   return (r >= s);
 }
 bool DNI::operator < (DNI& d) {
-  return (!(*this > d));
+  return (!(*this >= d));
 }
 bool DNI::operator <= (DNI& d) {
-  return (!(*this >= d));
+  return (!(*this > d));
 }
 
 DNI::operator unsigned long() {

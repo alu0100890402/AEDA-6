@@ -8,12 +8,6 @@ float* testData(std::vector<DNI>&, int, int, int);
 
 int main() {
 
-  // for((i=16; i<256; i++)); do
-  //   printf "\e[48;5;${i}m%03d" $i;
-  //   printf '\e[0m';
-  //   [ ! $((($i - 15) % 6)) -eq 0 ] && printf ' ' || printf '\n'
-  // done
-
   arbol = new ABB<DNI>;
 
   int modo;
@@ -31,10 +25,13 @@ int main() {
       std::cout << "[2] Eliminar Clave" << "\t: ";
       std::cin >> opcion;
       if(opcion > 0) {
-        std::string input;  bool res;
+        std::string input;  bool res; char l;
         std::cout << "DNI: ";
         std::cin >> input;
-        DNI clave(false, input);
+        std::cout << "Letra: ";
+        std::cin >> l;
+        std::cin.ignore();
+        DNI clave(false, input, l);
         if(opcion == 1) arbol->insertar(clave);
         else  {
           res = arbol->eliminar(clave);
@@ -67,17 +64,11 @@ int main() {
     std::cout << "Inserc.\t"<< N <<"\t"<< nPruebas <<"\t"<< resInser[0] <<"\t"<<resInser[1]<<"\t"<< resInser[2]<< '\n';
 
   }
-  // std::cout << "├── Cuadratica.cpp" << '\n';
-  // std::cout << "↘ ↙⤵" << '\n';
-  //
-  // std::cout << "Nv 0:     ╭─[6]─╮" << '\n';
-  // std::cout << "Nv 1:  ╭[4]╮   ╭[8]╮" << '\n';
-  // std::cout << "Nv 1: [3] [5] [7] [9]" << '\n';
 
   return 0;
 }
 
-
+//  Funcion creada para guardar los resultados del modo estadistica
 float* testData(std::vector<DNI>& banco, int nPruebas, int idxmin, int idxmax) {
   MAX=0, MIN=1000, CURRENT=0;
   // Pruebas
@@ -85,9 +76,9 @@ float* testData(std::vector<DNI>& banco, int nPruebas, int idxmin, int idxmax) {
   int acumulado=CURRENT, cont=nPruebas, i=0;
   while(cont-- > 0) {
     int indice = (i++)%(idxtotal)+idxmin;
-    auto res = arbol->buscar(banco[indice]);
-    if(CURRENT < MIN){ MIN = CURRENT; std::cout << "El minimo ahora es: " << MIN << '\n';}
-    if(CURRENT > MAX){ MAX = CURRENT; std::cout << "El maximo ahora es: " << MAX << '\n';}
+    arbol->buscar(banco[indice]);
+    if(CURRENT < MIN) MIN = CURRENT;
+    if(CURRENT > MAX) MAX = CURRENT;
     acumulado += CURRENT;
     CURRENT = 0;
   }

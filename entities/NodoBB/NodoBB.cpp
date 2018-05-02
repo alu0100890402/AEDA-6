@@ -5,32 +5,20 @@ NodoBB<Clave>::NodoBB(Clave X, NodoBB* iz, NodoBB* dc): data(X), izq(iz), dcha(d
   // std::cout << "Constructor de NodoBB" << '\n';
 }
 
-// template <class Clave>
-// bool NodoBB<Clave>::insertar(Clave X) {
-//   if(X > data) {
-//     if(dcha == nullptr) {
-//       dcha = new NodoBB(X);
-//     } else {
-//       dcha->insertar(X);
-//     }
-//   } else {
-//     if(izq == nullptr) {
-//       izq = new NodoBB(X);
-//     } else {
-//       izq->insertar(X);
-//     }
-//   }
-// }
-//
-// template <class Clave>
-// bool NodoBB<Clave>::buscar(Clave X) {
-//   std::cout << "Funcion buscar" << '\n';
-// }
-//
-// template <class Clave>
-// bool NodoBB<Clave>::eliminar(Clave X) {
-//   std::cout << "Funcion eliminar" << '\n';
-// }
+template <class Clave>
+void NodoBB<Clave>::addColision() {
+  colisiones.addOne();
+}
+
+template <class Clave>
+int NodoBB<Clave>::getColisiones() const {
+  return colisiones.getData();
+}
+
+template <class Clave>
+void NodoBB<Clave>::removeColision() {
+  colisiones.subOne();
+}
 
 template class NodoBB<int>;
 template class NodoBB<DNI>;
