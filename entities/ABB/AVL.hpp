@@ -13,9 +13,9 @@ public:
   void rotacion_DI(NodoAVL<Clave>*&);
 
   void insertar(Clave);
-  void inserta_bal(NodoAVL<Clave>*&);
-  void inserta_re_bal_izq(NodoAVL<Clave>*&);
-  void inserta_re_bal_dcha(NodoAVL<Clave>*&);
+  void inserta_bal(NodoAVL<Clave>*&, NodoAVL<Clave>*&, bool&);
+  void inserta_re_bal_izq(NodoAVL<Clave>*&, bool&);
+  void inserta_re_bal_dcha(NodoAVL<Clave>*&, bool&);
   bool eliminar(Clave);
   bool elimina_rama(NodoAVL<Clave>*&, Clave, bool&);
   void sustituye(NodoAVL<Clave>*&, NodoAVL<Clave>*&, bool&);
