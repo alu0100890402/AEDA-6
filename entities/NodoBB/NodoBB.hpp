@@ -5,6 +5,7 @@
 
 template <class Clave>
 class NodoBB {
+protected:
 
   Colision colisiones;
 

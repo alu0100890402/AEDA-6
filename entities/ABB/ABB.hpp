@@ -17,5 +17,5 @@ public:
   bool eliminarRama(NodoBB<Clave>*&, Clave);
   void sustituye(NodoBB<Clave>*&, NodoBB<Clave>*&);
 
-  void show();
+  virtual void show();
 };

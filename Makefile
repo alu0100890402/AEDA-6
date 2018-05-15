@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -std=c++11
 OBJDIR = target/obj
-TARGET = target/ABB
+TARGET = target/AVL
 
 all::	$(TARGET);
 

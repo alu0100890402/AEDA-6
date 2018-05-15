@@ -1,7 +1,7 @@
 #include "AVL.hpp"
 
 template <class Clave>
-AVL<Clave>::AVL(NodoAVL<Clave>* raiz_): ABB<Clave>(raiz_) {
+AVL<Clave>::AVL(NodoAVL<Clave>* raiz_): ABB<Clave>(raiz_), raiz(raiz_) {
   std::cout << "Constructor de AVL" << '\n';
 }
 
@@ -98,6 +98,9 @@ void AVL<Clave>::inserta_bal(NodoAVL<Clave>* &nodo, NodoAVL<Clave>* &nuevo, bool
     nodo = nuevo;
     crece = true;
   }
+  else if(nodo->data == nuevo->data) {
+    nodo->addColision();
+  }
   else if(nuevo->data < nodo->data) {
     inserta_bal(nodo->izq, nuevo, crece);
     if(crece) {
@@ -170,6 +173,10 @@ bool AVL<Clave>::elimina_rama(NodoAVL<Clave>* &nodo, Clave x, bool& decrece) {
       eliminar_re_bal_dcha(nodo, decrece);
     }
   } else {
+    if(nodo->getColisiones() > 0) {
+      nodo->removeColision();
+      return true;
+    }
     auto eliminado = nodo;
     if(nodo->izq == NULL) {
       nodo = nodo->dcha;
@@ -209,19 +216,23 @@ template <class Clave>
 void AVL<Clave>::eliminar_re_bal_izq(NodoAVL<Clave>* &nodo, bool& decrece) {
   std::cout << "Funcion eliminar_re_bal_izq" << '\n';
   switch (nodo->bal) {
-    case -1:  auto nodo1 = nodo->dcha;
-              if(nodo1->bal > 0) {
-                rotacion_DI(nodo);
-              } else {
-                if(nodo1->bal == 0) {
-                  decrece = false;
-                }
-                rotacion_DD(nodo);
-              }
-              break;
-    case 0:   nodo->bal = -1;
-              decrece = false;
-              break;
+    case -1: {
+      auto nodo1 = nodo->dcha;
+      if(nodo1->bal > 0) {
+        rotacion_DI(nodo);
+      } else {
+        if(nodo1->bal == 0) {
+          decrece = false;
+        }
+        rotacion_DD(nodo);
+      }
+      break;
+    }
+    case 0: {
+      nodo->bal = -1;
+      decrece = false;
+      break;
+    }
     case 1:   nodo->bal = 0;
   }
 }
@@ -230,19 +241,55 @@ template <class Clave>
 void AVL<Clave>::eliminar_re_bal_dcha(NodoAVL<Clave>* &nodo, bool& decrece) {
   std::cout << "Funcion eliminar_re_bal_dcha" << '\n';
   switch (nodo->bal) {
-    case 1:   auto nodo1 = nodo->izq;
-              if(nodo1->bal < 0) {
-                rotacion_ID(nodo);
-              } else {
-                if(nodo1->bal == 0) {
-                  decrece = false;
-                }
-                rotacion_II(nodo);
-              }
-              break;
-    case 0:   nodo->bal = 1;
-              decrece = false;
-              break;
+    case 1: {
+      auto nodo1 = nodo->izq;
+      if(nodo1->bal < 0) {
+        rotacion_ID(nodo);
+      } else {
+        if(nodo1->bal == 0) {
+          decrece = false;
+        }
+        rotacion_II(nodo);
+      }
+      break;
+    }
+    case 0: {
+      nodo->bal = 1;
+      decrece = false;
+      break;
+    }
     case -1:  nodo->bal = 0;
   }
 }
+
+template <class Clave>
+void AVL<Clave>::show() {
+
+  int nivel = 0;
+  std::queue<NodoAVL<Clave>*> cola;
+  cola.push(raiz);
+  while(!cola.empty()) {
+    std::cout << "Nv " << nivel++ << ": ";
+    int i = cola.size();
+    while(i-- > 0) {
+      std::cout << "[";
+      if(cola.front() != NULL) {
+        std::cout << cola.front()->data;
+        if(cola.front()->getColisiones() > 0)
+          std::cout << "("<< (cola.front()->getColisiones()) << ")";
+        cola.push(cola.front()->izq);
+        cola.push(cola.front()->dcha);
+      } else {
+        std::cout << ".";
+      }
+      std::cout << "]  " ;
+      cola.pop();
+    }
+    std::cout << '\n';
+  }
+}
+
+
+
+template class AVL<int>;
+template class AVL<DNI>;

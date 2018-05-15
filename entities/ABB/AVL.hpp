@@ -3,7 +3,7 @@
 
 template <class Clave>
 class AVL : public ABB<Clave> {
-
+  NodoAVL<Clave>* raiz;
 public:
   AVL(NodoAVL<Clave>* = NULL);
 
@@ -22,5 +22,5 @@ public:
   void eliminar_re_bal_izq(NodoAVL<Clave>*&, bool&);
   void eliminar_re_bal_dcha(NodoAVL<Clave>*&, bool&);
 
-
+  void show();
 };
