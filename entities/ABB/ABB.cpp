@@ -1,7 +1,7 @@
 #include "ABB.hpp"
 
 template <class Clave>
-ABB<Clave>::ABB(): raiz(NULL){
+ABB<Clave>::ABB(NodoBB<Clave>* raiz_): raiz(raiz_){
   // std::cout << "Constructor ABB" << '\n';
 }
 
@@ -49,7 +49,7 @@ void ABB<Clave>::insertarRama(NodoBB<Clave>* &nodo, Clave X) {
     else
         if(X == nodo->data)
             nodo->addColision();
-        else 
+        else
             if(X < nodo->data)
                 insertarRama(nodo->izq, X);
             else

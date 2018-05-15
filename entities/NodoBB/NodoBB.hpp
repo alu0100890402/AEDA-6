@@ -1,3 +1,4 @@
+#pragma once
 #include "../../include/includes.hpp"
 #include "../DNI/DNI.hpp"
 #include "../Colision/Colision.hpp"

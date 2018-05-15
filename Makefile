@@ -5,16 +5,22 @@ TARGET = target/ABB
 
 all::	$(TARGET);
 
-$(TARGET): $(OBJDIR)/main.o $(OBJDIR)/ABB.o $(OBJDIR)/NodoBB.o $(OBJDIR)/DNI.o $(OBJDIR)/Colision.o
+$(TARGET): $(OBJDIR)/main.o $(OBJDIR)/ABB.o $(OBJDIR)/NodoBB.o $(OBJDIR)/DNI.o $(OBJDIR)/Colision.o $(OBJDIR)/AVL.o $(OBJDIR)/NodoAVL.o
 	$(CC) $^ -o $@ $(CFLAGS)
 
 $(OBJDIR)/ABB.o:	entities/ABB/ABB.cpp
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(OBJDIR)/AVL.o:	entities/ABB/AVL.cpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(OBJDIR)/Colision.o:	entities/Colision/Colision.cpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(OBJDIR)/NodoBB.o:	entities/NodoBB/NodoBB.cpp
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(OBJDIR)/NodoAVL.o:	entities/NodoBB/NodoAVL.cpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(OBJDIR)/DNI.o:	entities/DNI/DNI.cpp
