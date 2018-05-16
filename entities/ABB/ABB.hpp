@@ -2,6 +2,7 @@
 
 template <class Clave>
 class ABB {
+protected:
   NodoBB<Clave>* raiz;
 public:
   ABB(NodoBB<Clave>* = NULL);
@@ -9,7 +10,7 @@ public:
 
   void podar(NodoBB<Clave>*);
 
-  NodoBB<Clave>* buscar(Clave X);
+  virtual NodoBB<Clave>* buscar(Clave X);
   NodoBB<Clave>* buscarRama(NodoBB<Clave>*, Clave);
   virtual void insertar(Clave X);
   void insertarRama(NodoBB<Clave>*&, Clave);

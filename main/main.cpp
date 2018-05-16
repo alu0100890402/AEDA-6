@@ -49,7 +49,7 @@ int main() {
     std::vector<DNI> bancoPruebas;
 
     for (size_t i=0; i<N*2; i++) {
-      bancoPruebas.push_back( DNI(true) );
+      bancoPruebas.push_back( DNI(true) /*(rand()%100)+1*/ );
     }
     for (size_t i=0; i<N; i++) {
       arbol->insertar(bancoPruebas[i]);
@@ -57,6 +57,10 @@ int main() {
 
     float* resBusqu = testData(bancoPruebas, nPruebas, 0, bancoPruebas.size()/2);
     float* resInser = testData(bancoPruebas, nPruebas, bancoPruebas.size()/2, bancoPruebas.size());
+
+    arbol->show();
+    // std::cout << "Arbol de ABB:" << '\n';
+    // arbol->ABB<int>::show();
 
     // Salida del programa
     std::cout << "\n\tN\tPruebas\tMinimo\tMedio\tMaximo" << '\n';
@@ -77,6 +81,7 @@ float* testData(std::vector<DNI>& banco, int nPruebas, int idxmin, int idxmax) {
   while(cont-- > 0) {
     int indice = (rand() % (idxmax-idxmin)) + idxmin;
     arbol->buscar(banco[indice]);
+    std::cout << "CURRENT = " << CURRENT << '\n';
     if(CURRENT < MIN) MIN = CURRENT;
     if(CURRENT > MAX) MAX = CURRENT;
     acumulado += CURRENT;

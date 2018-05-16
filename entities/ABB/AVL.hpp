@@ -12,6 +12,9 @@ public:
   void rotacion_ID(NodoAVL<Clave>*&);
   void rotacion_DI(NodoAVL<Clave>*&);
 
+  NodoAVL<Clave>* buscar(Clave);
+  NodoAVL<Clave>* buscarRama(NodoAVL<Clave>*, Clave);
+
   void insertar(Clave);
   void inserta_bal(NodoAVL<Clave>*&, NodoAVL<Clave>*&, bool&);
   void inserta_re_bal_izq(NodoAVL<Clave>*&, bool&);

@@ -30,6 +30,8 @@ NodoBB<Clave>* ABB<Clave>::buscar(Clave X) {
 
 template <class Clave>
 NodoBB<Clave>* ABB<Clave>::buscarRama(NodoBB<Clave>* nodo, Clave X) {
+  // std::cout << "Funcion buscar Rama ABB" << '\n';
+  // std::cout << "El nodo es: " << nodo << '\n';
   if(nodo == NULL)  return NULL;
   CURRENT++; if(X == nodo->data) return nodo;
   CURRENT++; if(X < nodo->data)  return buscarRama(nodo->izq, X);

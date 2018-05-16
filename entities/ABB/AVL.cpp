@@ -3,6 +3,25 @@
 template <class Clave>
 AVL<Clave>::AVL(NodoAVL<Clave>* raiz_): ABB<Clave>(raiz_), raiz(raiz_) {
   std::cout << "Constructor de AVL" << '\n';
+  // this->ABB<Clave>::raiz = this->AVL<Clave>::raiz;
+  // std::cout << "Raiz AVL = " << this->raiz << '\n';
+  // std::cout << "Raiz ABB = " << this->ABB<Clave>::raiz << '\n';
+}
+
+template <class Clave>
+NodoAVL<Clave>* AVL<Clave>::buscar(Clave X) {
+  // std::cout << "Funcion buscar AVL" << '\n';
+  return buscarRama(raiz, X);
+}
+
+template <class Clave>
+NodoAVL<Clave>* AVL<Clave>::buscarRama(NodoAVL<Clave>* nodo, Clave X) {
+  // std::cout << "Funcion buscar Rama AVL" << '\n';
+  // std::cout << "El nodo es: " << nodo << '\n';
+  if(nodo == NULL)  return NULL;
+  CURRENT++; if(X == nodo->data) return nodo;
+  CURRENT++; if(X < nodo->data)  return buscarRama(nodo->izq, X);
+  return buscarRama(nodo->dcha, X);
 }
 
 template <class Clave>
@@ -41,7 +60,7 @@ template <class Clave>
 void AVL<Clave>::rotacion_ID(NodoAVL<Clave>* &nodo) {
   std::cout << "Funcion rotacion_ID" << '\n';
   auto nodo1 = nodo->izq;
-  auto nodo2 = nodo->dcha;
+  auto nodo2 = nodo1->dcha;
   nodo->izq = nodo2->dcha;
   nodo2->dcha = nodo;
   nodo1->dcha = nodo2->izq;
@@ -63,8 +82,8 @@ void AVL<Clave>::rotacion_ID(NodoAVL<Clave>* &nodo) {
 template <class Clave>
 void AVL<Clave>::rotacion_DI(NodoAVL<Clave>* &nodo) {
   std::cout << "Funcion rotacion_DI" << '\n';
-  auto nodo1 = nodo->izq;
-  auto nodo2 = nodo->dcha;
+  auto nodo1 = nodo->dcha;
+  auto nodo2 = nodo1->izq;
   nodo->dcha = nodo2->izq;
   nodo2->izq = nodo;
   nodo1->izq = nodo2->dcha;
@@ -89,6 +108,7 @@ void AVL<Clave>::insertar(Clave x) {
   NodoAVL<Clave>* nuevo = new NodoAVL<Clave>(x);
   bool crece = false;
   inserta_bal( this->raiz, nuevo, crece );
+  // this->ABB<Clave>::raiz = this->raiz;
 }
 
 template <class Clave>
