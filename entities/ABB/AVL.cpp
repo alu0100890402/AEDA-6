@@ -2,10 +2,7 @@
 
 template <class Clave>
 AVL<Clave>::AVL(NodoAVL<Clave>* raiz_): ABB<Clave>(raiz_), raiz(raiz_) {
-  std::cout << "Constructor de AVL" << '\n';
-  // this->ABB<Clave>::raiz = this->AVL<Clave>::raiz;
-  // std::cout << "Raiz AVL = " << this->raiz << '\n';
-  // std::cout << "Raiz ABB = " << this->ABB<Clave>::raiz << '\n';
+  // std::cout << "Constructor de AVL" << '\n';
 }
 
 template <class Clave>
@@ -17,7 +14,6 @@ NodoAVL<Clave>* AVL<Clave>::buscar(Clave X) {
 template <class Clave>
 NodoAVL<Clave>* AVL<Clave>::buscarRama(NodoAVL<Clave>* nodo, Clave X) {
   // std::cout << "Funcion buscar Rama AVL" << '\n';
-  // std::cout << "El nodo es: " << nodo << '\n';
   if(nodo == NULL)  return NULL;
   CURRENT++; if(X == nodo->data) return nodo;
   CURRENT++; if(X < nodo->data)  return buscarRama(nodo->izq, X);
@@ -26,7 +22,7 @@ NodoAVL<Clave>* AVL<Clave>::buscarRama(NodoAVL<Clave>* nodo, Clave X) {
 
 template <class Clave>
 void AVL<Clave>::rotacion_II(NodoAVL<Clave>* &nodo) {
-  std::cout << "Funcion rotacion II" << '\n';
+  // std::cout << "Funcion rotacion II" << '\n';
   auto nodo1 = nodo->izq;
   nodo->izq = nodo1->dcha;
   nodo1->dcha = nodo;
@@ -42,7 +38,7 @@ void AVL<Clave>::rotacion_II(NodoAVL<Clave>* &nodo) {
 
 template <class Clave>
 void AVL<Clave>::rotacion_DD(NodoAVL<Clave>* &nodo) {
-  std::cout << "Funcion rotacion_DD" << '\n';
+  // std::cout << "Funcion rotacion_DD" << '\n';
   auto nodo1 = nodo->dcha;
   nodo->dcha = nodo1->izq;
   nodo1->izq = nodo;
@@ -58,7 +54,7 @@ void AVL<Clave>::rotacion_DD(NodoAVL<Clave>* &nodo) {
 
 template <class Clave>
 void AVL<Clave>::rotacion_ID(NodoAVL<Clave>* &nodo) {
-  std::cout << "Funcion rotacion_ID" << '\n';
+  // std::cout << "Funcion rotacion_ID" << '\n';
   auto nodo1 = nodo->izq;
   auto nodo2 = nodo1->dcha;
   nodo->izq = nodo2->dcha;
@@ -81,7 +77,7 @@ void AVL<Clave>::rotacion_ID(NodoAVL<Clave>* &nodo) {
 
 template <class Clave>
 void AVL<Clave>::rotacion_DI(NodoAVL<Clave>* &nodo) {
-  std::cout << "Funcion rotacion_DI" << '\n';
+  // std::cout << "Funcion rotacion_DI" << '\n';
   auto nodo1 = nodo->dcha;
   auto nodo2 = nodo1->izq;
   nodo->dcha = nodo2->izq;
@@ -104,7 +100,7 @@ void AVL<Clave>::rotacion_DI(NodoAVL<Clave>* &nodo) {
 
 template <class Clave>
 void AVL<Clave>::insertar(Clave x) {
-  std::cout << "Funcion insertar" << '\n';
+  // std::cout << "Funcion insertar" << '\n';
   NodoAVL<Clave>* nuevo = new NodoAVL<Clave>(x);
   bool crece = false;
   inserta_bal( this->raiz, nuevo, crece );
@@ -113,7 +109,7 @@ void AVL<Clave>::insertar(Clave x) {
 
 template <class Clave>
 void AVL<Clave>::inserta_bal(NodoAVL<Clave>* &nodo, NodoAVL<Clave>* &nuevo, bool& crece) {
-  std::cout << "Funcion inserta_bal" << '\n';
+  // std::cout << "Funcion inserta_bal" << '\n';
   if(nodo == NULL) {
     nodo = nuevo;
     crece = true;
@@ -137,7 +133,7 @@ void AVL<Clave>::inserta_bal(NodoAVL<Clave>* &nodo, NodoAVL<Clave>* &nuevo, bool
 
 template <class Clave>
 void AVL<Clave>::inserta_re_bal_izq(NodoAVL<Clave>* &nodo, bool& crece) {
-  std::cout << "Funcion inserta_re_bal_izq" << '\n';
+  // std::cout << "Funcion inserta_re_bal_izq" << '\n';
   switch (nodo->bal) {
     case -1:  nodo->bal = 0;
               crece = false;
@@ -155,7 +151,7 @@ void AVL<Clave>::inserta_re_bal_izq(NodoAVL<Clave>* &nodo, bool& crece) {
 
 template <class Clave>
 void AVL<Clave>::inserta_re_bal_dcha(NodoAVL<Clave>* &nodo, bool& crece) {
-  std::cout << "Funcion inserta_re_bal_dcha" << '\n';
+  // std::cout << "Funcion inserta_re_bal_dcha" << '\n';
   switch (nodo->bal) {
     case 1:   nodo->bal = 0;
               crece = false;
@@ -173,14 +169,14 @@ void AVL<Clave>::inserta_re_bal_dcha(NodoAVL<Clave>* &nodo, bool& crece) {
 
 template <class Clave>
 bool AVL<Clave>::eliminar(Clave x) {
-  std::cout << "Funcion eliminar (AVL)" << '\n';
+  // std::cout << "Funcion eliminar (AVL)" << '\n';
   bool decrece = false;
   elimina_rama( this->raiz, x, decrece );
 }
 
 template <class Clave>
 bool AVL<Clave>::elimina_rama(NodoAVL<Clave>* &nodo, Clave x, bool& decrece) {
-  std::cout << "Funcion eliminar_rama" << '\n';
+  // std::cout << "Funcion eliminar_rama" << '\n';
   if(nodo == NULL)  return false;
   if(x < nodo->data) {
     elimina_rama(nodo->izq, x, decrece);
@@ -218,7 +214,7 @@ bool AVL<Clave>::elimina_rama(NodoAVL<Clave>* &nodo, Clave x, bool& decrece) {
 
 template <class Clave>
 void AVL<Clave>::sustituye(NodoAVL<Clave>* &eliminado, NodoAVL<Clave>* &sust, bool& decrece) {
-  std::cout << "Funcion sustituye" << '\n';
+  // std::cout << "Funcion sustituye" << '\n';
   if(sust->dcha != NULL) {
     sustituye(eliminado, sust->dcha, decrece);
     if(decrece) {
@@ -234,7 +230,7 @@ void AVL<Clave>::sustituye(NodoAVL<Clave>* &eliminado, NodoAVL<Clave>* &sust, bo
 
 template <class Clave>
 void AVL<Clave>::eliminar_re_bal_izq(NodoAVL<Clave>* &nodo, bool& decrece) {
-  std::cout << "Funcion eliminar_re_bal_izq" << '\n';
+  // std::cout << "Funcion eliminar_re_bal_izq" << '\n';
   switch (nodo->bal) {
     case -1: {
       auto nodo1 = nodo->dcha;
@@ -259,7 +255,7 @@ void AVL<Clave>::eliminar_re_bal_izq(NodoAVL<Clave>* &nodo, bool& decrece) {
 
 template <class Clave>
 void AVL<Clave>::eliminar_re_bal_dcha(NodoAVL<Clave>* &nodo, bool& decrece) {
-  std::cout << "Funcion eliminar_re_bal_dcha" << '\n';
+  // std::cout << "Funcion eliminar_re_bal_dcha" << '\n';
   switch (nodo->bal) {
     case 1: {
       auto nodo1 = nodo->izq;

@@ -58,7 +58,17 @@ int main() {
     float* resBusqu = testData(bancoPruebas, nPruebas, 0, bancoPruebas.size()/2);
     float* resInser = testData(bancoPruebas, nPruebas, bancoPruebas.size()/2, bancoPruebas.size());
 
-    arbol->show();
+    if(N > 25) {
+      char opt;
+      std::cout << "¿Desea mostrar el estado del arbol?\n"
+      << "(con un tamaño tan grande tal vez no se aprecie la estructura) [y/n]: ";
+      std::cin >> opt;
+      if(opt == 'y') {
+        arbol->show();
+      }
+    } else {
+      arbol->show();
+    }
     // std::cout << "Arbol de ABB:" << '\n';
     // arbol->ABB<int>::show();
 
@@ -81,7 +91,6 @@ float* testData(std::vector<DNI>& banco, int nPruebas, int idxmin, int idxmax) {
   while(cont-- > 0) {
     int indice = (rand() % (idxmax-idxmin)) + idxmin;
     arbol->buscar(banco[indice]);
-    std::cout << "CURRENT = " << CURRENT << '\n';
     if(CURRENT < MIN) MIN = CURRENT;
     if(CURRENT > MAX) MAX = CURRENT;
     acumulado += CURRENT;
